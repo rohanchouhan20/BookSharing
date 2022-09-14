@@ -14,12 +14,13 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <title>Home Page</title>
 </head>
 <body>
 
-		
+
 	<br>
 	<br>
 
@@ -27,10 +28,9 @@
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 
-				<%String input2 = (String)request.getAttribute("msgfail");
-				if(input2!=null){%>
-					<div class="alert alert-danger" role="alert">${msgfail}</div>
-				<%}%>
+				<c:if test="${msgfail!=null}">
+					<div class="text-center alert alert-danger" role="alert">${msgfail}</div>
+				</c:if>
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center text-primary">Sign-Up</h4>

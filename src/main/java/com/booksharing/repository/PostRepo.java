@@ -14,7 +14,8 @@ public interface PostRepo extends CrudRepository<PostEntity, Integer> {
 	@Query(value = "select * from Post where post_user_id=:id", nativeQuery = true)
 	public List<PostEntity> findListOfPost(@Param("id") int id);
 	
-	@Query(value = "SELECT post_name FROM post where post_user_id=:id", nativeQuery = true)
-	public List<String> getPostName(@Param("id") int id);	
+	@Query(value = "SELECT * FROM post where post_user_id=:id", nativeQuery = true)
+	public List<PostEntity> getPostEntity(@Param("id") int id);		
+	
 
 }

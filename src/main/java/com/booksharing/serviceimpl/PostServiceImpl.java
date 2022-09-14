@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,42 +29,36 @@ public class PostServiceImpl implements PostService {
 	PostRepo postRepo;
 
 	@Autowired
-	PostEntity postEntity;
-
-	@Autowired
-	User user;
-
-	@Autowired
 	UserRepo userRepo;
 	
 	@Autowired
 	private FollowingRepo followingRepo;
 
 	
-	private List<String> listConvert(List<List<String>> listOfList) {
-		List<String> allPost = new ArrayList<String>();
+	private List<PostEntity> listConvert(List<List<PostEntity>> listOfList) {
+		List<PostEntity> allPost = new ArrayList<PostEntity>();
 		
-		for (List<String> list:listOfList) {
-			for (String string : list) {
+		for (List<PostEntity> list:listOfList) {
+			for (PostEntity string : list) {
 				allPost.add(string);			
 			}
 		}
 		return allPost;
 	}
 	
-	public List<String> getFollowingPost(HttpSession session) {
+	public List<PostEntity> getFollowingPost(HttpSession session) {
 		List<Integer> followingId = followingRepo.getFollowingCount((Integer)session.getAttribute("id")); 
 		System.out.println("Following ID list "+followingId);
-		List<List<String>> postName = new ArrayList<>();
+		List<List<PostEntity>> postName = new ArrayList<>();
 		 for (int i = 0; i < followingId.size(); i++) {
-			 postName.add(postRepo.getPostName(followingId.get(i)));
+			 postName.add(postRepo.getPostEntity(followingId.get(i)));
 		 }
-		 List<String> postNames= listConvert(postName);
+		 List<PostEntity> postNames= listConvert(postName);
 		return postNames;
 	}
 	
 	@Override
-	public void postUpload(MultipartFile imageFile, HttpSession session) throws IOException {
+	public boolean postUpload(MultipartFile imageFile, HttpSession session) throws IOException {
 		String profilePhoto = "";
 		if (!imageFile.isEmpty()) {
 			profilePhoto = imageFile.getOriginalFilename().trim();
@@ -75,13 +70,17 @@ public class PostServiceImpl implements PostService {
 			while ((bytes = is.read()) != -1)
 				fs.write(bytes);
 			fs.close();
-		}
+		
 		int loginUserId = (int) session.getAttribute("id");
+		PostEntity postEntity = new PostEntity();
+		User user=new User();
 		user.setId(loginUserId);
 		postEntity.setPostName(profilePhoto);
 		postEntity.setPostUserId(user);	
 		postRepo.save(postEntity);
-
+		return true;
+	}
+		return false;
 	}
 	
 	public List<PostEntity> listOfPost(int Id){

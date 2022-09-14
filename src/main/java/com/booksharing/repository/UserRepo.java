@@ -21,10 +21,6 @@ import com.booksharing.entity.User;
 		
 		@Query(value = "UPDATE user SET value = '1' where full_name = :e;", nativeQuery = true)
 		public User setFalse(@Param("e") String email);
-		
-		
-//		  @Query(value="select * from user where full_name like %:name%",nativeQuery =
-//		  true) public List<User> findByName(@Param("name") String name);
 		 
 		
 		public List<User> findByUserNameContains(String name);

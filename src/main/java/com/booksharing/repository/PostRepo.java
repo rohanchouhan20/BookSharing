@@ -1,0 +1,20 @@
+package com.booksharing.repository;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import com.booksharing.entity.PostEntity;
+
+@Repository
+public interface PostRepo extends CrudRepository<PostEntity, Integer> {
+	
+	@Query(value = "select * from Post where post_user_id=:id", nativeQuery = true)
+	public List<PostEntity> findListOfPost(@Param("id") int id);
+	
+	@Query(value = "SELECT post_name FROM post where post_user_id=:id", nativeQuery = true)
+	public List<String> getPostName(@Param("id") int id);	
+
+}

@@ -37,12 +37,17 @@ public class PostController {
 	}
 	ModelAndView modelAndView = new ModelAndView();
 	
+	
 	@PostMapping("/addPost")
 	public ModelAndView addPhotos(@RequestParam("imageFile") MultipartFile imageFile,HttpSession session) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
-		postServiceImpl.postUpload(imageFile,session);
-		modelAndView.addObject("msg1", "Post Added Successfully");
-		modelAndView.setViewName("success");
+		boolean val = postServiceImpl.postUpload(imageFile,session);
+		if(val) {
+		modelAndView.addObject("postAdded", "Post Added Successfully");
+		}else {			
+			modelAndView.addObject("postAdded", "Error");	
+		}
+		modelAndView.setViewName("redirect:/user/userProfile");
 		return modelAndView;
 		
 	}

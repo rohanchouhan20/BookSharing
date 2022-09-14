@@ -26,15 +26,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
-
-				<%
-					String input2 = (String) request.getAttribute("msgsuccess");
-				if (input2 != null) {
-				%>
-				<div class="alert alert-success" role="alert">${msgsuccess}</div>
-				<%
-					}
-				%>
+				<c:if test="${msgsuccess!=null}">
+					<div class="text-center alert alert-success" role="alert">${msgsuccess}</div>
+				</c:if>
+				<c:if test="${postAdded!=null}">
+					<div class="alert alert-success" role="alert">${postAdded}</div>
+				</c:if>
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center text-info">Your Profile</h4>

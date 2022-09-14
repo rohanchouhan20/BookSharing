@@ -27,16 +27,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
-
-				<%
-					String input2 = (String) request.getAttribute("msgfail");
-				if (input2 != null) {
-				%>
-				<div class=" text-center alert alert-danger" role="alert">${msgfail}</div>
-				<%
-					}
-				%>
-			
+			<c:if test="${msgfail!=null}">
+				<div class="text-center alert alert-danger" role="alert">${msgfail}</div>
+				</c:if>
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center text-primary">Add Post</h4>

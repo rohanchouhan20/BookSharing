@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface PostService {
 
-	public void postUpload(MultipartFile imageFile, HttpSession session)throws IOException;
+	public boolean postUpload(MultipartFile imageFile, HttpSession session)throws IOException;
 	
 	public List<PostEntity> listOfPost(int Id);
 }

@@ -2,6 +2,8 @@
 	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@page import="java.util.Map.Entry"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,7 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="/user/homepageview">Home <span class="sr-only">(current)</span>
 				</a></li>
-				 <li class="nav-item active"><a class="nav-link" 
+				<li class="nav-item active"><a class="nav-link"
 					href="/request/checkrequest">Friend Requests </a></li>
 				<li class="nav-item active"><a class="nav-link"
 					href="/user/userProfile">MyProfile </a></li>
@@ -49,8 +51,10 @@
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<div class="topnav-right ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">
-							Username: ${username} </a></li>
+					<li class="nav-item active"><a class="nav-link " href="#">
+							Username: ${username} <img height="40" width="40"
+							style="border-radius: 100px" src="../image/${profile}" />
+					</a></li>
 				</div>
 			</ul>
 			<nav class="navbar navbar-light bg-primary">

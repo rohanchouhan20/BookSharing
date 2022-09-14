@@ -3,6 +3,7 @@ package com.booksharing.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class UserController {
 	
 	@GetMapping("/homepageview")
 	public ModelAndView homepage() {
-		List<String> list = postServiceImpl.getFollowingPost(session);
+		List<PostEntity> list = postServiceImpl.getFollowingPost(session);
 		modelAndView.addObject("postName", list);
 		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
@@ -84,8 +85,8 @@ public class UserController {
 
 	@GetMapping("/userProfile")
 	public ModelAndView userProfile() {
-		modelAndView.setViewName("userProfile");
-		modelAndView.addObject("msgsuccess", null);
+		modelAndView.setViewName("userProfile");	
+		modelAndView.addObject("msgsuccess",null);
 		modelAndView.addObject("allPost", this.postServiceImpl.listOfPost((Integer)session.getAttribute("id")));
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
 		modelAndView.addObject("followingcount", followingServiceImpl.countFollowing((Integer)session.getAttribute("id")));
@@ -175,6 +176,7 @@ public class UserController {
 				String username = user.getUserName();
 				session.setAttribute("username", username);
 				session.setAttribute("id", user.getId());
+				session.setAttribute("profile", user.getProfilephoto());
 				boolean val = serviceImpl.getVal(u);
 				if (val) {
 					serviceImpl.setFalse(u);
@@ -182,8 +184,8 @@ public class UserController {
 					modelAndView.setViewName("onetimeprofile");
 				} else {
 					modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
-					modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
-					modelAndView.setViewName("homePage");
+					modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));			
+					modelAndView.setViewName("redirect:homepageview");
 				}
 			} else {
 				modelAndView.addObject("msgfail", "Invalid credential");

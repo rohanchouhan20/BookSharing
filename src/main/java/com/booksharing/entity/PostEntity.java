@@ -1,11 +1,16 @@
 package com.booksharing.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +26,7 @@ public class PostEntity {
 	@Column(name = "postId")
 	private int postId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "postUserId")
 	private User postUserId;
 	
@@ -29,7 +34,9 @@ public class PostEntity {
 	@Column(name = "postName")
 	private String postName;
 
-
+	@OneToMany(mappedBy = "likePost",fetch = FetchType.EAGER)
+	private List<LikePost> likes;
+	
 	public int getPostId() {
 		return postId;
 	}
@@ -43,6 +50,16 @@ public class PostEntity {
 
 	public void setPostId(int postId) {
 		this.postId = postId;
+	}
+
+
+	public List<LikePost> getLikes() {
+		return likes;
+	}
+
+
+	public void setLikes(List<LikePost> likes) {
+		this.likes = likes;
 	}
 
 
@@ -76,7 +93,7 @@ public class PostEntity {
 
 	@Override
 	public String toString() {
-		return "PostEntity [postId=" + postId + ", postUserId=" + postUserId + ", postName=" + postName + "]";
+		return "PostEntity [postId=" + postId + ", postUserId=" + postUserId + ", postName=" + postName + ", likes=";
 	}
 	
 	

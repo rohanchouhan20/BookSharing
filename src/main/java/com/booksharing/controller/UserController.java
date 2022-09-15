@@ -3,10 +3,10 @@ package com.booksharing.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,10 +24,8 @@ import com.booksharing.serviceimpl.FollowingServiceImpl;
 import com.booksharing.serviceimpl.PostServiceImpl;
 import com.booksharing.serviceimpl.UserServiceImpl;
 
-import net.bytebuddy.asm.Advice.This;
-
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user")	
 public class UserController {
 	ModelAndView modelAndView= new ModelAndView();
 	HttpSession session;
@@ -54,7 +52,9 @@ public class UserController {
 	@GetMapping("/homepageview")
 	public ModelAndView homepage() {
 		List<PostEntity> list = postServiceImpl.getFollowingPost(session);
+
 		modelAndView.addObject("postName", list);
+		modelAndView.addObject("id", (int)session.getAttribute("id"));
 		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
 		modelAndView.setViewName("homePage");
@@ -64,7 +64,6 @@ public class UserController {
 	public String signup() {
 		return "signup";
 	}
-	
 	
 	
 	@GetMapping("/searchdata")	

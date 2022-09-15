@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.booksharing.repository.PostRepo;
 import com.booksharing.serviceimpl.PostServiceImpl;
-import com.booksharing.serviceimpl.UserServiceImpl;
 
 
 @Controller
@@ -24,12 +22,6 @@ public class PostController {
 	
 	@Autowired
 	PostServiceImpl postServiceImpl;
-	
-	@Autowired
-	private UserServiceImpl serviceImpl;
-	
-	@Autowired
-	private PostRepo postRepo;
 
 	@GetMapping("/postPage")
 	public String postPage() {

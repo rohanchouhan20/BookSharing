@@ -2,7 +2,6 @@ package com.booksharing.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +25,7 @@ public class PostEntity {
 	@Column(name = "postId")
 	private int postId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn(name = "postUserId")
 	private User postUserId;
 	
@@ -34,7 +33,7 @@ public class PostEntity {
 	@Column(name = "postName")
 	private String postName;
 
-	@OneToMany(mappedBy = "likePost",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "likePost",fetch=FetchType.EAGER)
 	private List<LikePost> likes;
 	
 	public int getPostId() {

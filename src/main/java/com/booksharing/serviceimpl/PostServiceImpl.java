@@ -33,6 +33,15 @@ public class PostServiceImpl implements PostService {
 	private FollowingRepo followingRepo;
 
 	
+	public List<PostEntity> getPost(int id){
+		List<PostEntity> postList = postRepo.getPostEntity(id);
+		return postList;
+	}
+	public List<PostEntity> getPostData(){
+		List<PostEntity> postList = postRepo.getPostData();
+		return postList;
+	}
+	
 	private List<PostEntity> listConvert(List<List<PostEntity>> listOfList) {
 		List<PostEntity> allPost = new ArrayList<PostEntity>();
 		

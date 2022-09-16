@@ -43,7 +43,7 @@
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-	<%-- ${postName} --%>
+
 	<c:if test="${msgsuccess1!=null}">
 		<div class="text-center alert alert-success" role="alert">${msgsuccess1}</div>
 	</c:if>
@@ -67,26 +67,30 @@
 								<img class="card-img-center"
 									src="../uploadedPosts/${i.getPostName()}" alt="Card image cap">
 							</div>
-							
-							 <c:set var = "status" scope = "session" value ="${true} }"/>
+							<c:set var="status" scope="session" value="${true}" />
 							<c:forEach var="j" items="${i.likes}">
-							<p>${j.isLike()}</p>
-								<c:if test="${j.isLike()}">
-									<c:set var = "status" scope = "session" value ="${false}"/>
+								<%-- LOGIN ID - ${j.getLoginUserId()}
+							ISLIKE VAL - <p>${j.isLike()}</p> --%>
+
+								<c:if test="${j.isLike() && j.user.getId() == id}">
+									<c:set var="status" scope="session" value="${false}" />
 								</c:if>
+
 							</c:forEach>
 							<c:if test="${status}">
-							<p>Inside If</p>
-								<button class="p-1 fa fa-heart-o" style="color: red"
-								onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
+								<button class="p-1 fa fa-heart" style="color: white"
+									onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
+									<%-- onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()},${j.getLoginUserId()})" --%>
 								id="like${i.getPostId()}"></button>
 							</c:if>
-							
-							<c:if test="${status!=true}"></c:if>
-							<p>Inside else</p>
+
+							<c:if test="${status!=true}">
 								<button class="p-1 fa fa-heart" style="color: red"
-										onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
-										id="like${i.getPostId()}"></button>
+									<%-- onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})" --%>
+								onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()})"
+									id="like${i.getPostId()}"></button>
+
+							</c:if>
 							${i.likes.size()}
 						</div>
 					</div>
@@ -121,6 +125,27 @@
 		});
 	}
 	
+	
+	function dislike(postid,userid){
+		console.log(postid,userid);
+		$.ajax({
+			url:"/postLike/dislike?postid="+postid+"&userid="+userid,
+			success : function(result){
+				 var likecount=$("#likecount"+userid).text();
+
+				likecount=parseInt(likecount)-1;
+				console.log(likecount);
+				$("#likcount"+userid).html(likecount);
+				
+				$("#dislike"+userid).removeClass("fa fa-heart");
+				 $("#dislike"+userid).addClass("fa fa-heart-o");
+				 location.reload();
+			},
+			error: function(result){
+				console.log("Error");
+			}
+		});
+	}
 </script>
 
 

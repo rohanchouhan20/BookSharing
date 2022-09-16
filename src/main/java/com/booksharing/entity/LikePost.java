@@ -1,6 +1,5 @@
 package com.booksharing.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,7 +40,7 @@ public class LikePost {
 //	@Column(name = "loginUserId")
 	private int loginUserId;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private PostEntity likePost;
 
 	public int getId() {
@@ -54,8 +53,8 @@ public class LikePost {
 
 	@Override
 	public String toString() {
-		return "LikePost [id=" + id + ", postId=" + postId + ", isLike=" + isLike + ", postUserId=" + postUserId
-				+ ", loginUserId=" + loginUserId + ", likePost=" + likePost + "]";
+		return "LikePost [id=" + id + ", postId=" + postId + ", user=" + user + ", isLike=" + isLike + ", postUserId="
+				+ postUserId + ", loginUserId=" + loginUserId + ", likePost=" + likePost + "]";
 	}
 
 	public int getPostId() {

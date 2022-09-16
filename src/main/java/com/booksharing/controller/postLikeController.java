@@ -1,17 +1,18 @@
 package com.booksharing.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.booksharing.serviceimpl.PostLikeService;
 
-@Controller
+@RestController
 @RequestMapping("/postLike")
 public class postLikeController {
 
@@ -32,6 +33,24 @@ public class postLikeController {
 			return "fail";
 		}
 
+	}
+	
+
+	@GetMapping("/dislike")
+	public String dislike(@RequestParam("postid") int postid,@RequestParam("userid") int userid,HttpSession session) {
+		int loginuserid = (int)session.getAttribute("id");
+		System.out.println("User ID - " + userid);
+		System.out.println("POST ID - " + postid);
+		System.out.println("LOGIN User ID - " + loginuserid);
+		if(this.postLikeService.delete(userid,loginuserid,postid)>0) {
+			
+			System.out.println("TRUE");
+			session.setAttribute("succMsg", "Dislike.....");}
+		else {
+			System.out.println("TRUE");
+			session.setAttribute("failMsg", "Something went wrong.....");
+		}
+		return "success";
 	}
 
 }

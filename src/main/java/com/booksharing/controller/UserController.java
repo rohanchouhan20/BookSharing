@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,7 +51,10 @@ public class UserController {
 	@GetMapping("/homepageview")
 	public ModelAndView homepage() {
 		List<PostEntity> list = postServiceImpl.getFollowingPost(session);
-
+//		List<PostEntity> l1 = postServiceImpl.getPost((int)session.getAttribute("id"));
+//		System.out.println(" -> "+l1);
+//		List<PostEntity> l1 = postServiceImpl.getPostData();
+//		System.out.println(" -> "+l1);
 		modelAndView.addObject("postName", list);
 		modelAndView.addObject("id", (int)session.getAttribute("id"));
 		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");

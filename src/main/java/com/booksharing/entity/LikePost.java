@@ -2,7 +2,6 @@ package com.booksharing.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +28,7 @@ public class LikePost {
 	}
 
 	@OneToOne
+//	@JoinColumn(name = "user")
 	private User user;
 
 	@Column(name = "isLike")
@@ -40,7 +40,7 @@ public class LikePost {
 //	@Column(name = "loginUserId")
 	private int loginUserId;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	private PostEntity likePost;
 
 	public int getId() {
@@ -51,11 +51,14 @@ public class LikePost {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "LikePost [id=" + id + ", postId=" + postId + ", user=" + user + ", isLike=" + isLike + ", postUserId="
-				+ postUserId + ", loginUserId=" + loginUserId + ", likePost=" + likePost + "]";
-	}
+	
+	/*
+	 * @Override public String toString() { return "LikePost [id=" + id +
+	 * ", postId=" + postId + ", user=" + user + ", isLike=" + isLike +
+	 * ", postUserId=" + postUserId + ", loginUserId=" + loginUserId + ", likePost="
+	 * + likePost + "]"; }
+	 */
+	 
 
 	public int getPostId() {
 		return postId;

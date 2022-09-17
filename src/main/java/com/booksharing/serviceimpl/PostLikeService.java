@@ -55,6 +55,8 @@ public class PostLikeService {
 		post.setPostId(postid);
 		User user=new User();
 		user.setId(loginuserid);
+		System.out.println("Post"+post);
+		System.out.println("User"+user);
 		if(this.postLikeRepo.deleteLike(user,post,userid)>0) {
 			return 1;
 		}

@@ -43,10 +43,10 @@
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-
-	<c:if test="${msgsuccess1!=null}">
+${postName}
+	<%-- <c:if test="${msgsuccess1!=null}">
 		<div class="text-center alert alert-success" role="alert">${msgsuccess1}</div>
-	</c:if>
+	</c:if> --%>
 	<c:if test="${!postName.isEmpty()}">
 		<div>
 
@@ -71,27 +71,34 @@
 							<c:forEach var="j" items="${i.likes}">
 								<%-- LOGIN ID - ${j.getLoginUserId()}
 							ISLIKE VAL - <p>${j.isLike()}</p> --%>
-
+									${i.likes}
+								
 								<c:if test="${j.isLike() && j.user.getId() == id}">
 									<c:set var="status" scope="session" value="${false}" />
 								</c:if>
 
 							</c:forEach>
 							<c:if test="${status}">
+							<p>IF</p>
 								<button class="p-1 fa fa-heart" style="color: white"
 									onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
-									<%-- onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()},${j.getLoginUserId()})" --%>
+							
 								id="like${i.getPostId()}"></button>
 							</c:if>
 
 							<c:if test="${status!=true}">
+							<p>ELSE</p>
 								<button class="p-1 fa fa-heart" style="color: red"
-									<%-- onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})" --%>
+										
 								onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()})"
 									id="like${i.getPostId()}"></button>
 
 							</c:if>
 							${i.likes.size()}
+							<a
+								onClick="getData(${i.getPostId()},${i.getPostUserId().getId()})"
+								href="" data-toggle="modal" data-target="#exampleModal"
+								id="btn"><i class="fa fa-comment"></i></a>	${i.comment.size()}
 						</div>
 					</div>
 				</div>
@@ -100,7 +107,7 @@
 	</c:if>
 </body>
 
-
+<%@include file = "commentModal.jsp" %>
 <script>
 	function addislike(postid , userid){
 		console.log(postid,userid);
@@ -128,6 +135,7 @@
 	
 	function dislike(postid,userid){
 		console.log(postid,userid);
+		console.log("Dislike")
 		$.ajax({
 			url:"/postLike/dislike?postid="+postid+"&userid="+userid,
 			success : function(result){
@@ -145,6 +153,11 @@
 				console.log("Error");
 			}
 		});
+	}
+	
+	function getData(commentUser,postId){
+		$("#commentUser").val(commentUser);
+		$("#postId").val(postId);
 	}
 </script>
 

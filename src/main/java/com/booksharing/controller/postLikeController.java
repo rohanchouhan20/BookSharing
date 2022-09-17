@@ -1,6 +1,5 @@
 package com.booksharing.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class postLikeController {
 			System.out.println("TRUE");
 			session.setAttribute("succMsg", "Dislike.....");}
 		else {
-			System.out.println("TRUE");
+			System.out.println("FALSE");
 			session.setAttribute("failMsg", "Something went wrong.....");
 		}
 		return "success";

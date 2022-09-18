@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.booksharing.entity.PostEntity;
 import com.booksharing.serviceimpl.PostServiceImpl;
 
 
@@ -26,6 +28,12 @@ public class PostController {
 	@GetMapping("/postPage")
 	public String postPage() {
 		return "postPage";
+	}
+	@GetMapping("/goback")
+	public RedirectView goback() {
+		RedirectView rd = new RedirectView();
+		rd.setUrl("/user/homepageview");			
+		return rd;
 	}
 	ModelAndView modelAndView = new ModelAndView();
 	
@@ -42,6 +50,16 @@ public class PostController {
 		modelAndView.setViewName("redirect:/user/userProfile");
 		return modelAndView;
 		
+	}
+	
+	@GetMapping("/postComments")
+	public ModelAndView postComments(@RequestParam("postid") int postid) {
+		ModelAndView modelAndView = new ModelAndView();
+		PostEntity post = postServiceImpl.getAllComments(postid);
+		modelAndView.addObject("postComment", post);
+		System.out.println("Inside");
+		modelAndView.setViewName("viewComment");
+		return modelAndView;
 	}
 	
 	

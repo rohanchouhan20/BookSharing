@@ -17,9 +17,9 @@
 						id="postId" value="" name="postId">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
+					<button type="button" class="btn btn-danger"
 						data-dismiss="modal">Close</button>
-					<button onClick="addComment()" type="submit" class="btn btn-primary">Comment</button>
+					<button onClick="addComment()" type="submit" class="btn btn-success">Comment</button>
 				</div>
 			</form>
 		</div>

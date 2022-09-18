@@ -12,25 +12,6 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
-<!-- <script src="js/like-dislike.js"></script> -->
-
-<!-- Bootstrap CSS -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-
-<!--  <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous"> 
-	
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-	crossorigin="anonymous"></script>
-<meta charset="ISO-8859-1"> 
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script> -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
 	integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
@@ -43,7 +24,7 @@
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-${postName}
+	<%-- ${postName} --%>
 	<%-- <c:if test="${msgsuccess1!=null}">
 		<div class="text-center alert alert-success" role="alert">${msgsuccess1}</div>
 	</c:if> --%>
@@ -69,9 +50,6 @@ ${postName}
 							</div>
 							<c:set var="status" scope="session" value="${true}" />
 							<c:forEach var="j" items="${i.likes}">
-								<%-- LOGIN ID - ${j.getLoginUserId()}
-							ISLIKE VAL - <p>${j.isLike()}</p> --%>
-									${i.likes}
 								
 								<c:if test="${j.isLike() && j.user.getId() == id}">
 									<c:set var="status" scope="session" value="${false}" />
@@ -79,26 +57,26 @@ ${postName}
 
 							</c:forEach>
 							<c:if test="${status}">
-							<p>IF</p>
 								<button class="p-1 fa fa-heart" style="color: white"
 									onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
-							
-								id="like${i.getPostId()}"></button>
+									id="like${i.getPostId()}"></button>
 							</c:if>
 
 							<c:if test="${status!=true}">
-							<p>ELSE</p>
 								<button class="p-1 fa fa-heart" style="color: red"
-										
-								onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()})"
+									onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()})"
 									id="like${i.getPostId()}"></button>
 
 							</c:if>
-							${i.likes.size()}
-							<a
+							${i.likes.size()} <a
 								onClick="getData(${i.getPostId()},${i.getPostUserId().getId()})"
-								href="" data-toggle="modal" data-target="#exampleModal"
-								id="btn"><i class="fa fa-comment"></i></a>	${i.comment.size()}
+								href="" data-toggle="modal" data-target="#exampleModal" id="btn"><i
+								class="fa-regular fa-comment"></i></a> ${i.comment.size()}
+								
+							<form action="/post/postComments" action="GET">
+							<input type="text" hidden="true" id="postid" value="${i.getPostId()}" name="postid">
+								<button type="submit" class="btn btn-primary btn-sm">View All Comments</button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -107,7 +85,8 @@ ${postName}
 	</c:if>
 </body>
 
-<%@include file = "commentModal.jsp" %>
+<%@include file="commentModal.jsp"%>
+<%-- <%@include file="../js/likeFunction.js"%> --%>
 <script>
 	function addislike(postid , userid){
 		console.log(postid,userid);

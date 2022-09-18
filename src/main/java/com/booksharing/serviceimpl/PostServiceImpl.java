@@ -94,5 +94,9 @@ public class PostServiceImpl implements PostService {
 		List<PostEntity> list =  postRepo.findListOfPost(Id);
 		return list;
 	}
+	public PostEntity getAllComments(int postid) {
+
+		return postRepo.findById(postid).get();
+	}
 
 }

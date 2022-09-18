@@ -25,7 +25,7 @@ public class CommentController {
 	@Transactional
 	@GetMapping("/addcomment")
 	public RedirectView addComment(HttpServletRequest req) {
-		RedirectView md=new RedirectView();
+		RedirectView redirectview=new RedirectView();
 		HttpSession session=req.getSession();
 //		System.out.println("POST ID - "+Integer.parseInt(req.getParameter("postId")));
 //		System.out.println("COMMENT USER - "+Integer.parseInt(req.getParameter("commentUser")));
@@ -41,7 +41,7 @@ public class CommentController {
 			System.out.println("FALSEEEEEEEEEEE");
 //			session.setAttribute("failMsg","Please Add Proper Comment.");
 		}
-		md.setUrl("/user/homepageview");
-		return md;
+		redirectview.setUrl("/user/homepageview");
+		return redirectview;
 	}
 }

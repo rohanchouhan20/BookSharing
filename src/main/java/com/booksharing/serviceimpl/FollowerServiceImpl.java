@@ -1,5 +1,7 @@
 package com.booksharing.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class FollowerServiceImpl implements FollowerService {
 		return this.followerRepo.save(entity);
 	}
 
+	public List<Followers> followersList(int id){
+		return this.followerRepo.findByUser_id(id);
+	}
+	
+	
 	public int countFollower(int id) {
 		return this.followerRepo.countFollower(id);
 	}

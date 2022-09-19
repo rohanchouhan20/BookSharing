@@ -41,6 +41,19 @@ public class RequestsController {
 			modelAndView.setViewName("friendsProfile");
 		return modelAndView;
 	}
+	
+	@GetMapping("/deleterequest")
+	public ModelAndView deleteRequest(@RequestParam("userId") int userId){
+		ModelAndView modelAndView = new ModelAndView();
+		int value = this.requestsServiceImpl.declineRequest(userId);
+		if (value > 0)
+			modelAndView.addObject("msg1", "Request Declined");
+		else
+			modelAndView.addObject("msg1", "Error");
+		
+		modelAndView.setViewName("friendsProfile");
+		return modelAndView;
+	}
 
 	@GetMapping("/checkrequest")
 	public ModelAndView checkRequest(HttpServletRequest request) {

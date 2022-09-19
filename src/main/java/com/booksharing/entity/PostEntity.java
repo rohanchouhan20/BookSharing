@@ -36,18 +36,17 @@ public class PostEntity {
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
-	@OneToMany(mappedBy = "likePost",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "likePost", cascade = CascadeType.ALL)
 	private List<LikePost> likes;
 
-	@LazyCollection(LazyCollectionOption.FALSE)	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
-	@OneToMany(mappedBy = "postcomments",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "postcomments", cascade = CascadeType.ALL)
 	private List<Comment> comment;
 
 	public int getPostId() {
 		return postId;
 	}
-	
 
 	public PostEntity() {
 		super();
@@ -74,11 +73,9 @@ public class PostEntity {
 		return comment;
 	}
 
-
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
-
 
 	public void setPostUserId(User postUserId) {
 		this.postUserId = postUserId;
@@ -99,12 +96,10 @@ public class PostEntity {
 		this.postName = postName;
 	}
 
-	
-	  @Override
+	@Override
 	public String toString() {
 		return "PostEntity [postId=" + postId + ", postUserId=" + postUserId + ", postName=" + postName + ", likes="
 				+ likes + ", comment=" + comment + "]";
 	}
-	 
 
 }

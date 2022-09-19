@@ -57,13 +57,13 @@
 
 							</c:forEach>
 							<c:if test="${status}">
-								<button class="p-1 fa fa-heart" style="color: white"
+								<button class="p-1 fa fa-heart" style="color: black;border:none"
 									onClick="addislike(${i.getPostId()},${i.getPostUserId().getId()})"
-									id="like${i.getPostId()}"></button>
+									id="like${i.getPostId()}" ></button>
 							</c:if>
 
 							<c:if test="${status!=true}">
-								<button class="p-1 fa fa-heart" style="color: red"
+								<button class="p-1 fa fa-heart" style="color: red;border:none"
 									onClick="dislike(${i.getPostId()},${i.getPostUserId().getId()})"
 									id="like${i.getPostId()}"></button>
 
@@ -112,9 +112,7 @@
 	}
 	
 	
-	function dislike(postid,userid){
-		console.log(postid,userid);
-		console.log("Dislike")
+	function dislike(postid,userid){	
 		$.ajax({
 			url:"/postLike/dislike?postid="+postid+"&userid="+userid,
 			success : function(result){

@@ -8,7 +8,7 @@
 				<button type="button" class="btn-close" data-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<form action="/comment/addcomment" action="post">
+			<form action="/comment/addcomment" action="post" autocomplete="off">
 				<div class="modal-body">
 
 					<input type="text" placeholder="Enter Comment" name="comment">

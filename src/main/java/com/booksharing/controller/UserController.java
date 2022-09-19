@@ -17,10 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.booksharing.entity.PostEntity;
+import com.booksharing.entity.Requests;
 import com.booksharing.entity.User;
 import com.booksharing.serviceimpl.FollowerServiceImpl;
 import com.booksharing.serviceimpl.FollowingServiceImpl;
 import com.booksharing.serviceimpl.PostServiceImpl;
+import com.booksharing.serviceimpl.RequestsServiceImpl;
 import com.booksharing.serviceimpl.UserServiceImpl;
 
 @Controller
@@ -41,6 +43,8 @@ public class UserController {
 	@Autowired
 	private PostServiceImpl postServiceImpl;
 	
+	@Autowired
+	private RequestsServiceImpl requestsServiceImpl;
 	
 
 	public UserController() {
@@ -51,10 +55,6 @@ public class UserController {
 	@GetMapping("/homepageview")
 	public ModelAndView homepage() {
 		List<PostEntity> list = postServiceImpl.getFollowingPost(session);
-//		List<PostEntity> l1 = postServiceImpl.getPost((int)session.getAttribute("id"));
-//		System.out.println(" -> "+l1);
-//		List<PostEntity> l1 = postServiceImpl.getPostData();
-//		System.out.println(" -> "+l1);
 		modelAndView.addObject("postName", list);
 		modelAndView.addObject("id", (int)session.getAttribute("id"));
 		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
@@ -70,15 +70,20 @@ public class UserController {
 	
 	@GetMapping("/searchdata")	
 	public ModelAndView searchdata(@RequestParam("search") String search) {
+		List<Requests> requests= requestsServiceImpl.getSenderRequest((int)session.getAttribute("id"));
+		System.out.println(requests);
 		System.out.println("Search -> "+search);
 		User in  = serviceImpl.getDetails(search);
 		if(in!=null) {
 		modelAndView.addObject("user", in);
+		modelAndView.addObject("requests", requests);
+		modelAndView.addObject("id", (int)session.getAttribute("id"));
 		modelAndView.addObject("msgsuccess", search);
 		modelAndView.setViewName("friendsProfile");
 		return modelAndView;
 		}
 		modelAndView.addObject("user", null);
+		modelAndView.addObject("requests", requests);
 		modelAndView.addObject("msgsuccess", "No User Found");
 		modelAndView.setViewName("friendsProfile");
 		return modelAndView;
@@ -160,7 +165,7 @@ public class UserController {
 			modelAndView.setViewName("signup");
 		}
 	 else if(check=="password"){
-		modelAndView.addObject("msgfail", "Please Follow Correct Sequence");
+		modelAndView.addObject("msgfail", "Please Follow Correct Sequence for password");
 		modelAndView.setViewName("signup");
 	}
 		return modelAndView;
@@ -170,7 +175,6 @@ public class UserController {
 	public ModelAndView islogin(@ModelAttribute User u,HttpSession session) {
 		this.session=session;
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("IN");
 		if (serviceImpl.checkLogin(u)) {
 			if (serviceImpl.isPresent(u)) {
 				User user = serviceImpl.userName(u);
@@ -201,14 +205,24 @@ public class UserController {
 	
 	@ResponseBody
 	@GetMapping("/search")
-	public List<User> getAllUsers(@RequestParam("name") String name) {
+		public List<User> getAllUsers(@RequestParam("name") String name,HttpSession session) {
 		System.out.println("VALUE : "+name);	
-		List<User> users=serviceImpl.getAllUser(name);
+		List<User> users=serviceImpl.getAllUser(name,(int)session.getAttribute("id"));
 		System.out.println(users);
 		return users;
 	}
-
 	
+//	public ListDto getAllUsers(@RequestParam("name") String name, HttpSession session) {
+//		ListDto listDto = new ListDto();
+//		
+//		List<Requests> requests= requestsServiceImpl.getRequest((int)session.getAttribute("id"));
+//		if(!requests.isEmpty()) {listDto.setGetRequests(requests);}
+//		System.out.println("VALUE : "+name);	
+//		List<User> users=serviceImpl.getAllUser(name,(int)session.getAttribute("id"));
+//		System.out.println(users);
+//		listDto.setUser(users);
+//		return listDto;
+//	}
 
 	
 }

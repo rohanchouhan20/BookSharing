@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.booksharing.entity.User;
 
 
-//@Component
 	@Repository
 	public interface UserRepo extends CrudRepository<User, Integer>{
 		public User findByEmailAndPassword(String email, String password);

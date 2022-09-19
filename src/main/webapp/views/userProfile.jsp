@@ -93,27 +93,29 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-4">
-						<h5>Followers</h5>
+						<!-- <h5>Followers</h5> -->
+						<h5><a href="/follower/followerList">Followers</a></h5>
 					</div>
 					<div class="col-md-4">
-						<h5>Following</h5>
+						<!-- <h5>Following</h5> -->
+							<h5><a href="/following/followingList">Following</a></h5>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4"></div>
 		</div>
 	</div>
-
+<br>
 	<div class="col-md-7 offset-md-4">
 		<table>
 			<tr>
-				<th><h5>Fav-Book -> ${user.getFavbooks()}</h5></th>
+				<th><h5>Favorite-Book -> ${user.getFavbooks()}</h5></th>
 			</tr>
 			<tr>
-				<th><h5>Fav-Song -> ${user.getFavsongs()}</h5></th>
+				<th><h5>Favorite-Song -> ${user.getFavsongs()}</h5></th>
 			</tr>
 			<tr>
-				<th><h5>Fav-Place -> ${user.getFavplaces()}</h5></th>
+				<th><h5>Favorite-Place -> ${user.getFavplaces()}</h5></th>
 			</tr>
 
 		</table>

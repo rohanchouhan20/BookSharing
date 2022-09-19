@@ -46,11 +46,6 @@ public class PostLikeService {
 
 	@Transactional()
 	public int delete(int userid,int loginuserid,int postid){
-//		public int delete(int Id,int postId,int realUser,int likeUser){
-		System.out.println("Rohan");
-		System.out.println("User ID - " + userid);
-		System.out.println("POST ID - " + postid);
-		System.out.println("LOGIN User ID - " + loginuserid);
 		PostEntity post=new PostEntity();
 		post.setPostId(postid);
 		User user=new User();

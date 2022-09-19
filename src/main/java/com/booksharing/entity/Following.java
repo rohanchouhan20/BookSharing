@@ -11,17 +11,17 @@ import javax.persistence.Table;
 
 //@Component
 @Entity
-@Table(name="following")
+@Table(name = "following")
 public class Following {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
+
 	private int user_id;
-	
+
 	@OneToOne
-	@JoinColumn(name="following")
+	@JoinColumn(name = "following")
 	private User following;
 
 	@Override
@@ -52,6 +52,5 @@ public class Following {
 	public void setFollowing(User following) {
 		this.following = following;
 	}
-	
-	
+
 }

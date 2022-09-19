@@ -33,13 +33,7 @@ public class User {
 	private String favbooks;
 	private String favsongs;
 	private String favplaces;
-	private String profilephoto="Default.png";
-//	@OneToMany(mappedBy = "user")
-//	private List<demouserfollowing> userid;
-	
-//	@OneToMany(mappedBy = "userfollowers")
-//	private List<userfollowers> userfollowid;
-	
+	private String profilephoto = "Default.png";
 
 	public User(String fullName, String userName, String email, String password, boolean value, String favbooks,
 			String favsongs, String favplaces, String profilephoto) {
@@ -55,26 +49,13 @@ public class User {
 		this.profilephoto = profilephoto;
 	}
 
-
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-//	public List<demouserfollowing> getUserid() {
-//		return userid;
-//	}
-//
-//
-//	public void setUserid(List<demouserfollowing> userid) {
-//		this.userid = userid;
-//	}
-
 
 	public String getFavbooks() {
 		return favbooks;

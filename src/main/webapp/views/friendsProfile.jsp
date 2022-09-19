@@ -25,6 +25,8 @@
 
 	<%@ include file="nav.jsp"%>
 	<br>
+		
+	<br>
 	<div class="d-flex justify-content-center">
 		<c:if test="${user.getProfilephoto()!=null}">
 			<img height="200" width="200" style="border-radius: 900px"
@@ -37,9 +39,15 @@
 			<h3>${msgsuccess}</h3>
 		</div>
 		<div class="d-flex justify-content-center">
-			<h4>
-				<a href="/request/followrequest?userId=${user.getId()}">Follow</a>
-			</h4>
+			<c:forEach var="j" items="${requests}">
+		<c:if test="${j.sender.id == id}">
+			<h4><a href="/request/deleterequest?userId=${user.getId()}">Decline</a></h4>
+		</c:if>
+		</c:forEach>
+		<c:if test="${requests.isEmpty()}">
+			<h4><a href="/request/followrequest?userId=${user.getId()}">Follow</a></h4>
+		</c:if>
+	
 		</div>
 	</c:if>
 	<c:choose>

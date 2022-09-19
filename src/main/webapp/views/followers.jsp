@@ -27,38 +27,34 @@
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-lg-4 offset-lg-4">
-			<%-- ${postComment} --%>
-			<table table border=1 cellspacing="1">
-				<tr>
-					<th colspan="2">COMMENTS</th>
-				</tr>
-				<tr>
-					<th>Name</th>
-					<th>Comment</th>
-				</tr>
-				<c:forEach var="j" items="${postComment.comment}">
-				<tr>
-					<td>${j.user.fullName}</td>
-					<td>${j.usercomments}</td>
-				</tr>
-				</c:forEach>
-			</table>
-			<a href="/post/goback" class="btn btn-success active" role="button" aria-pressed="true">Go-Back</a>
-		</div>
+			<%-- 	${listOfFollowers} --%>
+				<table table border=1 style="width: 100%">
+					<tr align="center" style= "height:50px">
+						<th colspan="2">ALL FOLLOWERS</th>
+					</tr>
+					<tr >
+						<th>Profile</th>
+						<th>Name</th>
+					</tr>
+					<c:forEach var="j" items="${listOfFollowers}">	
+						<tr>
+							<td><img src="../image/${j.follower.profilephoto}" alt="" border=3 height=60 width=60></img></td>
+							<td>${j.follower.fullName}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div class="container mt-4">
+					<div class="row">
+						<div class="col-lg-4 offset-lg-4">
+							<a href="/follower/goback" class="btn btn-success active"
+								role="button" aria-pressed="true">Go-Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </html>

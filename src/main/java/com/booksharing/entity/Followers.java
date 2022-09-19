@@ -9,20 +9,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 //@Component
 @Entity
-@Table(name="followers")
+@Table(name = "followers")
 public class Followers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
+
 	private int user_id;
-	
+
 	@OneToOne
-	@JoinColumn(name="follower")
+	@JoinColumn(name = "follower")
 	private User follower;
 
 	@Override
@@ -53,7 +52,5 @@ public class Followers {
 	public void setFollower(User follower) {
 		this.follower = follower;
 	}
-	
-	
-	
+
 }

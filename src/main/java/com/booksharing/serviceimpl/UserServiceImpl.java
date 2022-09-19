@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,14 +91,13 @@ public class UserServiceImpl implements UserService {
 		u.setFavsongs(song);
 		u.setFavplaces(places);
 		repo.save(u);
-//		repo.saveAndFlush(u);
 		return true;
 	}
 
 	public void oneTimeProfile(User u, MultipartFile imageFile, String username) throws IOException {
 		String profilePhoto = "";
 		if (!imageFile.isEmpty()) {
-			profilePhoto = imageFile.getOriginalFilename().trim();
+			profilePhoto = imageFile.getOriginalFilename().trim();	
 			InputStream is = imageFile.getInputStream();
 			String path = "C:\\Users\\DELL\\Desktop\\Spring STS Projects\\FriendBookSharing\\src\\main\\webapp\\image\\"
 					+ profilePhoto;
@@ -156,7 +156,17 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
-	public List<User> getAllUser(String name) {
-		return repo.findByUserNameContains(name);
+	public List<User> getAllUser(String name, int id) {
+		List<User> userList= repo.findByUserNameContains(name);
+		
+		List<User> tempList=userList.stream().filter(x->x.getId()!=id).collect(Collectors.toList());
+		
+//		for(int i=0;i<userList.size();i++) {
+//			if(userList.get(i).getId()==id)
+//				continue;
+//			
+//			tempList.add(userList.get(i));
+//		}
+		return tempList;
 	}
 }

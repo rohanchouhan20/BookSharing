@@ -9,5 +9,7 @@ public interface FollowingService {
 	public Following addfollowing(Following entity);
 
 	public int countFollowing(int id);
+	
+	
 
 }

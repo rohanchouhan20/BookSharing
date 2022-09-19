@@ -11,11 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.booksharing.entity.Requests;
 import com.booksharing.entity.User;
 
-//@Component
 @Repository
 public interface RequestsRepo extends CrudRepository<Requests, Integer> {
 	@Query(value = "select * from requests where reciever=:id and accepted=:accept or (reciever=:id and follow_back=:follow)", nativeQuery = true)
 	public List<Requests> findByUserIdAndAccept(@Param("id") int id, @Param("accept") boolean accept,
+			@Param("follow") boolean follow);
+	
+	@Query(value = "select * from requests where sender=:id and accepted=:accept or (sender=:id and follow_back=:follow)", nativeQuery = true)
+	public List<Requests> findByUserSenderId(@Param("id") int id, @Param("accept") boolean accept,
 			@Param("follow") boolean follow);
 
 	@Modifying
@@ -29,6 +32,10 @@ public interface RequestsRepo extends CrudRepository<Requests, Integer> {
 	@Modifying
 	@Query(value = "delete from requests where reciever=:acceptUser and sender=:userId", nativeQuery = true)
 	public int deleteByUserIdAndFollowerId(@Param("acceptUser") int acceptUser, @Param("userId") int userId);
+	
+	@Modifying
+	@Query(value = "delete from requests where reciever=:userId", nativeQuery = true)
+	public int deleteRequest(@Param("userId") int userId);
 
 	@Query(value = "select r from Requests r where r.reciever=:acceptUser and r.sender=:userEntity")
 	public Requests findByUserIdAndfollower(@Param("acceptUser") int acceptUser, @Param("userEntity") User user);

@@ -18,4 +18,7 @@ public interface FollowingRepo extends CrudRepository<Following, Integer> {
 
 	@Query(value = "SELECT following FROM following where user_id =:id", nativeQuery = true)
 	public List<Integer> getFollowingCount(@Param("id") int id);
+	
+	@Query(value = "select * from following where user_id=:id", nativeQuery = true)
+	public List<Following> findByUser_id(@Param("id") int id);
 }

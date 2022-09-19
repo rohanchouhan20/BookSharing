@@ -21,8 +21,6 @@ public class postLikeController {
 	@ResponseBody
 	@GetMapping("/addlike")
 	public String addLike(@RequestParam("postid") int postid, @RequestParam("userid") int userid, HttpSession session) {
-		System.out.println("POST ID - " + postid);
-		System.out.println("User ID - " + userid);
 		int id = (Integer) session.getAttribute("id");
 		System.out.println("Login User Id - " + id);
 
@@ -33,21 +31,15 @@ public class postLikeController {
 		}
 
 	}
-	
 
 	@GetMapping("/dislike")
-	public String dislike(@RequestParam("postid") int postid,@RequestParam("userid") int userid,HttpSession session) {
-		int loginuserid = (int)session.getAttribute("id");
-		System.out.println("User ID - " + userid);
-		System.out.println("POST ID - " + postid);
-		System.out.println("LOGIN User ID - " + loginuserid);
-		if(this.postLikeService.delete(userid,loginuserid,postid)>0) {
-			
+	public String dislike(@RequestParam("postid") int postid, @RequestParam("userid") int userid, HttpSession session) {
+		int loginuserid = (int) session.getAttribute("id");
+		if (this.postLikeService.delete(userid, loginuserid, postid) > 0) {
+
 			System.out.println("TRUE");
-			session.setAttribute("succMsg", "Dislike.....");}
-		else {
+		} else {
 			System.out.println("FALSE");
-			session.setAttribute("failMsg", "Something went wrong.....");
 		}
 		return "success";
 	}

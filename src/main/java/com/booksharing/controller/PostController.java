@@ -31,9 +31,9 @@ public class PostController {
 	}
 	@GetMapping("/goback")
 	public RedirectView goback() {
-		RedirectView rd = new RedirectView();
-		rd.setUrl("/user/homepageview");			
-		return rd;
+		RedirectView redirectview = new RedirectView();
+		redirectview.setUrl("/user/homepageview");			
+		return redirectview;
 	}
 	ModelAndView modelAndView = new ModelAndView();
 	

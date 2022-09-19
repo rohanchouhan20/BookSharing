@@ -33,6 +33,6 @@ public interface UserService {
 
 	public boolean checkLogin(User u);
 
-	public List<User> getAllUser(String name);
+	public List<User> getAllUser(String name,int id);
 
 }

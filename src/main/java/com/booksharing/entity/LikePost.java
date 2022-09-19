@@ -51,14 +51,12 @@ public class LikePost {
 		this.id = id;
 	}
 
-	
 	/*
 	 * @Override public String toString() { return "LikePost [id=" + id +
 	 * ", postId=" + postId + ", user=" + user + ", isLike=" + isLike +
 	 * ", postUserId=" + postUserId + ", loginUserId=" + loginUserId + ", likePost="
 	 * + likePost + "]"; }
 	 */
-	 
 
 	public int getPostId() {
 		return postId;
@@ -99,7 +97,5 @@ public class LikePost {
 	public void setLikePost(PostEntity likePost) {
 		this.likePost = likePost;
 	}
-
-	
 
 }

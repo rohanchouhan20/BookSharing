@@ -29,7 +29,7 @@ import com.booksharing.serviceimpl.UserServiceImpl;
 @RequestMapping("/user")	
 public class UserController {
 	ModelAndView modelAndView= new ModelAndView();
-	HttpSession session;
+//	HttpSession session;
 	
 	@Autowired
 	private UserServiceImpl serviceImpl;
@@ -53,11 +53,11 @@ public class UserController {
 	
 	
 	@GetMapping("/homepageview")
-	public ModelAndView homepage() {
+	public ModelAndView homepage(HttpSession session) {
 		List<PostEntity> list = postServiceImpl.getFollowingPost(session);
 		modelAndView.addObject("postName", list);
 		modelAndView.addObject("id", (int)session.getAttribute("id"));
-		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
+//		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
 		modelAndView.setViewName("homePage");
 		return modelAndView;
@@ -69,7 +69,7 @@ public class UserController {
 	
 	
 	@GetMapping("/searchdata")	
-	public ModelAndView searchdata(@RequestParam("search") String search) {
+	public ModelAndView searchdata(@RequestParam("search") String search,HttpSession session) {
 		List<Requests> requests= requestsServiceImpl.getSenderRequest((int)session.getAttribute("id"));
 		System.out.println(requests);
 		System.out.println("Search -> "+search);
@@ -90,7 +90,7 @@ public class UserController {
 	}
 
 	@GetMapping("/userProfile")
-	public ModelAndView userProfile() {
+	public ModelAndView userProfile(HttpSession session) {
 		modelAndView.setViewName("userProfile");	
 		modelAndView.addObject("msgsuccess",null);
 		modelAndView.addObject("allPost", this.postServiceImpl.listOfPost((Integer)session.getAttribute("id")));
@@ -106,7 +106,7 @@ public class UserController {
 		return "login";
 	}
 	@GetMapping("/onetimeprofile")
-	public ModelAndView onetimeprofile() {
+	public ModelAndView onetimeprofile(HttpSession session) {
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
 		modelAndView.setViewName("onetimeprofile");
 		return modelAndView;
@@ -140,7 +140,7 @@ public class UserController {
 	public ModelAndView onetimeprofile(@ModelAttribute User u, @RequestParam("imageFile") MultipartFile imageFile,
 			HttpSession session) throws IOException {
 		serviceImpl.oneTimeProfile(u, imageFile ,(String)session.getAttribute("username"));
-		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
+//		modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
 		modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));
 		modelAndView.setViewName("homePage");
 		return modelAndView;
@@ -173,7 +173,7 @@ public class UserController {
 
 	@PostMapping("/logincheck")
 	public ModelAndView islogin(@ModelAttribute User u,HttpSession session) {
-		this.session=session;
+//		this.session=session;
 		ModelAndView modelAndView = new ModelAndView();
 		if (serviceImpl.checkLogin(u)) {
 			if (serviceImpl.isPresent(u)) {
@@ -188,7 +188,7 @@ public class UserController {
 					modelAndView.addObject("msgsuccess", "Login Successfully");
 					modelAndView.setViewName("onetimeprofile");
 				} else {
-					modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
+//					modelAndView.addObject("msgsuccess1", "Welcome to Share your knowledge by Sharing");
 					modelAndView.addObject("user", serviceImpl.getDetails((String)session.getAttribute("username")));			
 					modelAndView.setViewName("redirect:homepageview");
 				}

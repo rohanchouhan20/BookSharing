@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page isELIgnored="false" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en" >
 <head>
@@ -29,14 +30,20 @@
          <p><c:out value = "<div class="alert alert-success" role="alert">${msg}</div>"/><p>
       		</c:if>
       		 --%>
-				<%String input1 = (String)request.getAttribute("msgsuccess");
+				<%-- <%String input1 = (String)request.getAttribute("msgsuccess");
 				if(input1!=null){%>
 					<div class=" text-center alert alert-success" role="alert">${msgsuccess}</div>
 				<%}%>
 				<%String input2 = (String)request.getAttribute("msgfail");
 				if(input2!=null){%>
 					<div class=" text-center alert alert-danger" role="alert">${msgfail}</div>
-				<%}%>
+				<%}%> --%>
+				<c:if test="${msgsuccess!=null}">
+				<div class="text-center alert alert-success" role="alert">${msgsuccess}</div>
+				</c:if>
+				<c:if test="${msgfail!=null}">
+				<div class="text-center alert alert-danger" role="alert">${msgfail}</div>
+				</c:if>
 				<%-- <%String val = (String)request.getAttribute("msgInvalid");
 				if(val!=null){
 				%>

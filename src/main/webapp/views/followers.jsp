@@ -33,7 +33,7 @@
 						<th colspan="2">ALL FOLLOWERS</th>
 					</tr>
 					<tr >
-						<th>Profile</th>
+						<th>ProfilePhoto</th>
 						<th>Name</th>
 					</tr>
 					<c:forEach var="j" items="${listOfFollowers}">	

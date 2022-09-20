@@ -51,7 +51,7 @@ public class RequestsController {
 		else
 			modelAndView.addObject("msg1", "Error");
 		
-		modelAndView.setViewName("friendsProfile");
+		modelAndView.setViewName("success");
 		return modelAndView;
 	}
 

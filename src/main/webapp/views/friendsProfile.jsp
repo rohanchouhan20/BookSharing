@@ -25,7 +25,9 @@
 
 	<%@ include file="nav.jsp"%>
 	<br>
-		
+		<c:if test="${msg6!=null}">
+				<div class="text-center alert alert-success" role="alert">${msg6	}</div>
+				</c:if>
 	<br>
 	<div class="d-flex justify-content-center">
 		<c:if test="${user.getProfilephoto()!=null}">

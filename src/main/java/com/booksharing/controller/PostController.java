@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,14 +54,26 @@ public class PostController {
 	}
 	
 	@GetMapping("/postComments")
-	public ModelAndView postComments(@RequestParam("postid") int postid) {
+	public ModelAndView postComments(@RequestParam("postid") int postid,@RequestParam("val") String val,HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		PostEntity post = postServiceImpl.getAllComments(postid);
+		System.out.println("Post -> "+post);
 		modelAndView.addObject("postComment", post);
+		modelAndView.addObject("postid", postid);
+		if(val.equals("true")){
+		modelAndView.addObject("val", true);}else {modelAndView.addObject("val", false);}
+		modelAndView.addObject("loginid", (int)session.getAttribute("id"));
 		System.out.println("Inside");
 		modelAndView.setViewName("viewComment");
 		return modelAndView;
 	}
 	
+	@GetMapping("/delete/{id}")
+	public ModelAndView delete(@PathVariable int id, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		postServiceImpl.postDelete(id);
+		modelAndView.setViewName("redirect:/user/userProfile");
+		return modelAndView;
+	}
 	
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.booksharing.entity.LikePost;
 import com.booksharing.serviceimpl.PostLikeService;
 
 @RestController
@@ -30,6 +32,16 @@ public class postLikeController {
 			return "fail";
 		}
 
+	}
+	@GetMapping("/postLikes")
+	public ModelAndView postLikes(@RequestParam("postid") int postid) {
+		System.out.println("Inside");
+		ModelAndView modelAndView = new ModelAndView();
+		LikePost postLikes = postLikeService.getAllLikes(postid);
+		System.out.println(postLikes);
+		modelAndView.addObject("postLikes", postLikes);
+		modelAndView.setViewName("viewLikes");
+		return modelAndView;
 	}
 
 	@GetMapping("/dislike")

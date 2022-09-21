@@ -11,7 +11,7 @@
 			<form action="/comment/addcomment" action="post" autocomplete="off">
 				<div class="modal-body">
 
-					<input type="text" placeholder="Enter Comment" name="comment">
+					<input type="text" placeholder="Enter Comment" name="comment" value="">
 					<input type="text" hidden="true" id="commentUser" value=""
 						name="commentUser"> <input type="text" hidden="true"
 						id="postId" value="" name="postId">
@@ -25,3 +25,12 @@
 		</div>
 	</div>
 </div>
+
+<%-- <a onClick="getData(${i.getPostId()},${i.getPostUserId().getId()})"
+   href="" data-toggle="modal" data-target="#exampleModal" id="btn"><i
+	class="fa-regular fa-comment"></i></a> 
+	
+	function getData(commentUser,postId){
+		$("#commentUser").val(commentUser);
+		$("#postId").val(postId);
+	} --%>

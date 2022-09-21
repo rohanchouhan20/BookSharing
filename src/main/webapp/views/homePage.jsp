@@ -50,6 +50,7 @@
 							</div>
 							<c:set var="status" scope="session" value="${true}" />
 							<c:forEach var="j" items="${i.likes}">
+							
 								
 								<c:if test="${j.isLike() && j.user.getId() == id}">
 									<c:set var="status" scope="session" value="${false}" />
@@ -75,6 +76,8 @@
 								
 							<form action="/post/postComments" action="GET">
 							<input type="text" hidden="true" id="postid" value="${i.getPostId()}" name="postid">
+							<input type="text" hidden="true" id="val"
+											value="false" name="val">
 								<button type="submit" class="btn btn-primary btn-sm">View All Comments</button>
 							</form>
 						</div>

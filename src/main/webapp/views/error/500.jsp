@@ -3,7 +3,7 @@
 	{	
 %>
 		<script>
-			window.location = "http://localhost:8080/user/loginpage";
+			window.location = "http://localhost:8080/user/homepageview";
 		</script>
 <%
 	}

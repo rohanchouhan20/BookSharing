@@ -1,18 +1,1 @@
-<%
-	if(session.getAttribute("id")!=null)
-	{	
-%>
-		<script>
-			window.location = "http://localhost:8080/user/loginpage";
-		</script>
-<%
-	}
-	else
-	{
-%>
-		<script>
-			window.location = "http://localhost:8080/user/loginpage";
-		</script>
-<%
-	}
-%>
+<h4>THIS IS 404 error</h4>

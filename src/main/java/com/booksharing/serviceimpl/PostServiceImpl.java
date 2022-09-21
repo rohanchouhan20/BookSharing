@@ -31,6 +31,11 @@ public class PostServiceImpl implements PostService {
 	
 	@Autowired
 	private FollowingRepo followingRepo;
+	
+	
+	public void postDelete(int id) {
+		postRepo.deleteById(id);
+	}
 
 	
 	public List<PostEntity> getPost(int id){

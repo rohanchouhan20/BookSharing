@@ -40,7 +40,8 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [user=" + user + ", usercomments=" + usercomments + "]";
+		return "Comment [id=" + id + ", user=" + user + ", loginuserid=" + loginuserid + ", usercomments="
+				+ usercomments + "]";
 	}
 
 	public void setId(int id) {

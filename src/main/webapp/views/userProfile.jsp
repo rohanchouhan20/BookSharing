@@ -12,7 +12,14 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+	integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -94,18 +101,22 @@
 					<div class="col-md-2"></div>
 					<div class="col-md-4">
 						<!-- <h5>Followers</h5> -->
-						<h5><a href="/follower/followerList">Followers</a></h5>
+						<h5>
+							<a href="/follower/followerList">Followers</a>
+						</h5>
 					</div>
 					<div class="col-md-4">
 						<!-- <h5>Following</h5> -->
-							<h5><a href="/following/followingList">Following</a></h5>
+						<h5>
+							<a href="/following/followingList">Following</a>
+						</h5>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4"></div>
 		</div>
 	</div>
-<br>
+	<br>
 	<div class="col-md-7 offset-md-4">
 		<table>
 			<tr>
@@ -132,6 +143,7 @@
 				</div>
 			</div>
 		</div>
+		<%-- ${allPost} --%>
 		<c:forEach var="i" items="${allPost}">
 			<div class="container mt-4">
 				<div class="row">
@@ -139,6 +151,28 @@
 						<div class="card" style="width: 18rem;">
 							<img class="card-img-top"
 								src="../uploadedPosts/${i.getPostName()}" alt="Card image cap">
+
+							<%-- ${i.comment} --%>
+							<br>
+							<div class="row">
+								<div class="col-md-4">
+										
+									<i class="fa fa-heart"
+										style="color: red; border: none"> - ${i.likes.size()}</i>
+									<form action="/post/postComments" action="GET">
+										<input type="text" hidden="true" id="postid"
+											value="${i.getPostId()}" name="postid">
+										<input type="text" hidden="true" id="val"
+											value="true" name="val">
+										<button type="submit" class="fa-regular fa-comment"
+											style="color: green; border: none"> - ${i.comment.size()}</button>
+									</form>
+									
+								</div>
+							</div>
+							<a class="btn btn-sm btn-danger"
+								href="/post/delete/${i.getPostId()}">Delete Post</a>
+
 						</div>
 					</div>
 				</div>

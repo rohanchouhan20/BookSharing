@@ -27,29 +27,100 @@
 	<div class="container mt-4">
 		<div class="row">
 			<div class="col-lg-4 offset-lg-4">
-				<%-- ${postComment} --%>
+				<c:if test="${update!=null}">
+					<div class="text-center alert alert-success" role="alert">${update}</div>
+				</c:if>
+				<%-- ${postComment.comment} --%>
 				<table table border=1 style="width: 100%">
-					<tr align="center" style= "height:50px">
-						<th colspan="3">ALL COMMENTS</th>
+					<tr align="center" style="height: 50px">
+						<th colspan="4">ALL COMMENTS</th>
 					</tr>
-					<tr >
+					<tr>
 						<th>Profile</th>
 						<th>Name</th>
 						<th>Comment</th>
+						<th>MODIFY</th>
 					</tr>
 					<c:forEach var="j" items="${postComment.comment}">
+
 						<tr>
-						<td><img src="../image/${j.user.profilephoto}" alt="" border=3 height=60 width=60></img></td>
+							<td><img src="../image/${j.user.profilephoto}" alt=""
+								border=3 height=60 width=60></img></td>
 							<td>${j.user.fullName}</td>
 							<td>${j.usercomments}</td>
+							<td><c:if test="${j.user.id==loginid}">
+									<button type="button" class="btn btn-primary btn-sm"
+										data-toggle="modal" data-target="#exampleModal">Edit</button>
+
+									<form action="/comment/deleteComment" action="post">
+										<input type="text" hidden="true" id="commentid"
+											value="${j.id}" name="commentid"> <input type="text"
+											hidden="true" id="postid" value="${postid}" name="postid">
+											<input type="text" hidden="true" id="val"
+											value="false" name="val">
+										<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+									</form>
+
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1"
+										role="dialog" aria-labelledby="exampleModalLabel"
+										aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Edit
+														Comment</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form action="/comment/editComments" action="post"
+													autocomplete="off">
+													<div class="modal-body">
+														<input type="text" placeholder="Enter Comment"
+															name="comment" value=""> <input
+															type="text" hidden="true" id="commentid" value="${j.id}"
+															name="commentid"> <input type="text"
+															hidden="true" id="postid" value="${postid}" name="postid">
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary">Save
+															changes</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!-- Modal -->
+									</c:if>
+									<c:if test="${val==true}">
+									<form action="/comment/deleteComment" action="post">
+											<input type="text" hidden="true" id="commentid"
+												value="${j.id}" name="commentid"> <input type="text"
+												hidden="true" id="postid" value="${postid}" name="postid">
+												<input type="text" hidden="true" id="val"
+											value="true" name="val">
+											<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+										</form>
+									</c:if>
+								</td>
 						</tr>
 					</c:forEach>
 				</table>
 				<div class="container mt-4">
 					<div class="row">
 						<div class="col-lg-4 offset-lg-4">
+						<c:if test="${val==true}">
+							<a href="/comment/goback" class="btn btn-success active"
+								role="button" aria-pressed="true">Go-Back</a>
+								</c:if>
+						<c:if test="${val==false}">
 							<a href="/post/goback" class="btn btn-success active"
 								role="button" aria-pressed="true">Go-Back</a>
+								</c:if>
 						</div>
 					</div>
 				</div>
@@ -57,17 +128,15 @@
 		</div>
 	</div>
 </body>
+<%-- <%@include file="editComment.jsp"%> --%>
 
 
-
-
-
-
-
-
-
-
-
+<script type="text/javascript">
+	function getData(commentid, usercomments) {
+		$("#commentid").val(commentid);
+		$("#usercomments").val(usercomments);
+	}
+</script>
 
 
 </html>

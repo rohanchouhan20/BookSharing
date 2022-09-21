@@ -57,5 +57,9 @@ public class PostLikeService {
 		}
 		return 0;
 	}
+
+	public LikePost getAllLikes(int postid) {
+			return postLikeRepo.findById(postid).get();
+		}
+	}
 	
-}

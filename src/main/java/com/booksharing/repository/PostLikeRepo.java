@@ -1,5 +1,7 @@
 package com.booksharing.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,4 +22,8 @@ public interface PostLikeRepo extends CrudRepository<LikePost, Integer> {
 	@Query(value = "delete from like_post where user_id=:user and like_post_post_id=:post and login_user_id=:loginuserid", nativeQuery = true)
 	public int deleteLike(@Param("user") User user, @Param("post") PostEntity post,
 			@Param("loginuserid") int loginuserid);
+	
+	
+	@Query(value = "select * from like_post where like_post_post_id=:postid ", nativeQuery = true)
+	public List<LikePost> findByPostUserId(@Param("postid") int postid);
 }

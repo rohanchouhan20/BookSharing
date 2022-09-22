@@ -58,9 +58,10 @@ public class CommentController {
 	public ModelAndView postComments(@RequestParam("commentid") int commentid, @RequestParam("comment") String c,
 			@RequestParam("postid") int postid, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
+		if(!c.isEmpty()) {
 		Comment Comment = commentServiceImpl.editComment(commentid, c);
+		modelAndView.addObject("Comment", Comment);}
 		PostEntity post = postServiceImpl.getAllComments(postid);
-		modelAndView.addObject("Comment", Comment);
 		modelAndView.addObject("postComment", post);
 		modelAndView.addObject("postid", postid);
 		modelAndView.addObject("loginid", (int) session.getAttribute("id"));

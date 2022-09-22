@@ -15,40 +15,74 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-
+<link rel="stylesheet" href="../css/login.css" />
 <title>Login Page</title>
 </head>
-<body>
-	
-	<br>
-	<br>
-	<div class="container">
+<body class="img js-fullheight" style="background-image: url(../image/bg.jpg); background-size:cover; background-position:center;height:100vh">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+				<br>
+					<h2 class="heading-section">Login</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<form action="/user/logincheck" method="POST">
+		      	
+		      	<div class="form-group">
+		      	
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" placeholder="Email" name="email" required>
+		      		</div>
+	            <div class="form-group">
+	              <input id="password-field" type="password" class="form-control" placeholder="Password" name="password" required>
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	            </div>
+	            
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+	            </div>
+	          </form>
+	          <p class="w-100 text-center">&mdash;  Not Registered? &mdash;</p>
+	          <div class="social d-flex text-center">
+	          	<a href="/user/signuppage" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2">Signup</span></a>
+	          	<!-- <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a> -->
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+
+	<%-- <div class="container">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 			
-			<%--  <c:if test = "${msg!=null}">
+			 <c:if test = "${msg!=null}">
          <p><c:out value = "<div class="alert alert-success" role="alert">${msg}</div>"/><p>
       		</c:if>
-      		 --%>
-				<%-- <%String input1 = (String)request.getAttribute("msgsuccess");
+      		
+				<%String input1 = (String)request.getAttribute("msgsuccess");
 				if(input1!=null){%>
 					<div class=" text-center alert alert-success" role="alert">${msgsuccess}</div>
 				<%}%>
 				<%String input2 = (String)request.getAttribute("msgfail");
 				if(input2!=null){%>
 					<div class=" text-center alert alert-danger" role="alert">${msgfail}</div>
-				<%}%> --%>
+				<%}%>
 				<c:if test="${msgsuccess!=null}">
 				<div class="text-center alert alert-success" role="alert">${msgsuccess}</div>
 				</c:if>
 				<c:if test="${msgfail!=null}">
 				<div class="text-center alert alert-danger" role="alert">${msgfail}</div>
 				</c:if>
-				<%-- <%String val = (String)request.getAttribute("msgInvalid");
+				<%String val = (String)request.getAttribute("msgInvalid");
 				if(val!=null){
 				%>
 					<div class="alert alert-success" role="alert">${msgInvalid}</div>
-				<%} %> --%>
+				<%} %>
 				<div class="card">
 					<div class="card-body">
 						<h4 class="text-center text-primary">Login</h4>
@@ -75,7 +109,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 
 

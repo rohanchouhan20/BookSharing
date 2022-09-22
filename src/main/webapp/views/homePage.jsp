@@ -21,9 +21,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="../css/userProfile.css" />
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
+	
 	<%-- ${postName} --%>
 	<%-- <c:if test="${msgsuccess1!=null}">
 		<div class="text-center alert alert-success" role="alert">${msgsuccess1}</div>
@@ -35,7 +37,7 @@
 				<div class="container mt-4">
 					<div class="row">
 						<div class="col-lg-4 offset-lg-4">
-							<div class="card" style="width: 18rem;">
+							<div class="card " style="width: 18rem;">
 								<div class="row">
 									<div class="col-md-4">
 										<img height="50" width="50" style="border-radius: 100px"
@@ -86,6 +88,7 @@
 			</c:forEach>
 		</div>
 	</c:if>
+	
 </body>
 
 <%@include file="commentModal.jsp"%>

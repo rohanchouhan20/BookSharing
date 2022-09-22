@@ -26,11 +26,105 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="../css/userProfile.css" />
 </head>
 <body>
 
 	<%@ include file="nav.jsp"%>
-	<div class="container">
+
+	<section class="h-100 gradient-custom-2">
+		<div class="container py-5 h-100">
+			<div
+				class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col col-lg-9 col-xl-12">
+					<div class="card">
+					<c:if test="${msgsuccess!=null}">
+					<div class="text-center alert alert-success" role="alert">${msgsuccess}</div>
+				</c:if>
+				<c:if test="${postAdded!=null}">
+					<div class="alert alert-success" role="alert">${postAdded}</div>
+				</c:if>
+						<div class="rounded-top text-white d-flex flex-row"
+							style="background-color: #000; height: 200px;">
+							<div class="ms-4 ml-3 mt-5 d-flex flex-column"
+								style="width: 150px; ">
+								<img src="../image/${user.getProfilephoto()}"
+									alt="Generic placeholder image"
+									class="img-fluid img-thumbnail mt-4 mb-2"
+									style="width: 150px; z-index: 1">
+								<a type="submit" href="/user/profileEdit"
+									class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+									style="z-index: 1;">Edit profile</a>
+	
+							</div>
+							<div class="ms-3 ml-3" style="margin-top: 130px;">
+								<h5>${user.getUserName()}</h5>
+							</div>
+						</div>
+						<div class="p-4 text-black" style="background-color: #f8f9fa;">
+							<div class="d-flex justify-content-end text-center py-1">
+
+								<div class="px-4">
+									<p class="mb-1 h4">${followerscount}</p>
+									<p class="medium text-muted mb-1 h4"><a href="/follower/followerList">Followers</a></p>
+								</div>
+								<div>
+									<p class="mb-1 h4">${followingcount}</p>
+									<p class="medium text-muted mb-1 h4"><a href="/following/followingList">Following</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="card-body p-4 text-black">
+							<div class="mb-5">
+								<p class="lead fw-normal mb-1">About</p>
+								<div class="p-4" style="background-color: #f8f9fa;">
+									<p class="font-italic mb-1">Favorite-Book -> ${user.getFavbooks()}</p>
+									<p class="font-italic mb-1">Favorite-Song -> ${user.getFavsongs()}</p>
+									<p class="font-italic mb-0">Favorite-Place -> ${user.getFavplaces()}</p>
+								</div>
+							</div>
+							<div
+								class="d-flex justify-content-between align-items-center mb-4">
+								<p class="lead fw-normal mb-0">Recent photos</p>
+								<p class="mb-0">
+									<a href="/post/postPage" class="text-muted">Add Post</a>
+								</p>
+							</div>
+							<div class="row g-2">
+							<c:forEach var="i" items="${allPost}">
+								<div class="col-lg-4" style = "height:500px; width:500px" >
+										<img class="card-img-top"
+								src="../uploadedPosts/${i.getPostName()}" width ="500px" height = "400px" alt="Card image cap">
+								<br>
+							<div class="row">
+								<div class="col-md-4">
+									<div class = "row ml-1">
+									<form action="/post/postComments" action="GET">
+									<i class="fa fa-heart" style="color: red; border: none">
+										${i.likes.size()}</i>
+										<input type="text" hidden="true" id="postid"
+											value="${i.getPostId()}" name="postid"> <input
+											type="text" hidden="true" id="val" value="true" name="val">
+										<button type="submit" class="fa-regular fa-comment"
+											style="color: green; border: none">
+											${i.comment.size()}</button>
+									</form>
+									</div>	
+								</div>
+							</div>
+							<a class="btn btn-sm btn-danger"
+								href="/post/delete/${i.getPostId()}">Delete Post</a>
+								</div>
+							</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<%-- <div class="container">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<c:if test="${msgsuccess!=null}">
@@ -143,7 +237,7 @@
 				</div>
 			</div>
 		</div>
-		<%-- ${allPost} --%>
+		${allPost}
 		<c:forEach var="i" items="${allPost}">
 			<div class="container mt-4">
 				<div class="row">
@@ -152,22 +246,22 @@
 							<img class="card-img-top"
 								src="../uploadedPosts/${i.getPostName()}" alt="Card image cap">
 
-							<%-- ${i.comment} --%>
+							${i.comment}
 							<br>
 							<div class="row">
 								<div class="col-md-4">
-										
-									<i class="fa fa-heart"
-										style="color: red; border: none"> - ${i.likes.size()}</i>
+
+									<i class="fa fa-heart" style="color: red; border: none">
+										${i.likes.size()}</i>
 									<form action="/post/postComments" action="GET">
 										<input type="text" hidden="true" id="postid"
-											value="${i.getPostId()}" name="postid">
-										<input type="text" hidden="true" id="val"
-											value="true" name="val">
+											value="${i.getPostId()}" name="postid"> <input
+											type="text" hidden="true" id="val" value="true" name="val">
 										<button type="submit" class="fa-regular fa-comment"
-											style="color: green; border: none"> - ${i.comment.size()}</button>
+											style="color: green; border: none">
+											${i.comment.size()}</button>
 									</form>
-									
+
 								</div>
 							</div>
 							<a class="btn btn-sm btn-danger"
@@ -181,7 +275,7 @@
 	</section>
 	<section>
 		<br> <br> <br>
-	</section>
+	</section> --%>
 	<script src="../js/search.js"></script>
 
 	<!-- <!-- Optional JavaScript -->

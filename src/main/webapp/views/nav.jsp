@@ -40,17 +40,17 @@
 			<!-- <ul class="navbar-nav mr-auto"> -->
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="/user/homepageview">Home <span class="sr-only">(current)</span>
+					href="/user/homepageview"><i class="fa-solid fa-house-user"></i> Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="/request/checkrequest">Friend Requests </a></li>
-				<li class="nav-item active"><a class="nav-link"
-					href="/user/userProfile">MyProfile </a></li>
+					href="/request/checkrequest"><i class="fa-solid fa-user-group" ></i> Friend Requests </a></li>
 				<li class="nav-item active "><a class="nav-link"
-					href="/user/loginpage"> Logout </a></li>
+					href="/user/userProfile"><i class="fa-solid fa-user"></i> MyProfile </a></li>
+				<li class="nav-item active "><a class="nav-link"
+					href="/user/loginpage"><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				<div class="topnav-right ml-auto">
+				<div class="topnav-right ml-auto">	
 					<li class="nav-item active"><a class="nav-link " href="#">
 							Username: ${username} <img height="40" width="40"
 							style="border-radius: 100px" src="../image/${profile}" />

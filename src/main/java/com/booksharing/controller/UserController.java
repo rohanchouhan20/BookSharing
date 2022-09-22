@@ -150,7 +150,7 @@ public class UserController {
 	public ModelAndView login(@ModelAttribute User u) {
 		ModelAndView modelAndView = new ModelAndView();
 		String  check= serviceImpl.check(u);
-		if (check=="ok"){
+		if (check=="ok"){	
 			if (serviceImpl.isPresent(u)) {
 				modelAndView.addObject("msgfail", "User already present");
 				modelAndView.setViewName("signup");

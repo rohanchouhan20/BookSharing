@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,5 +38,13 @@ public class FollowerController {
 		RedirectView redirectview = new RedirectView();
 		redirectview.setUrl("/user/userProfile");			
 		return redirectview;
+	}
+	
+	@GetMapping("/delete/{id}")
+	public ModelAndView delete(@PathVariable int id, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		followerServiceImpl.unfollow(id);
+		modelAndView.setViewName("redirect:/user/userProfile");
+		return modelAndView;
 	}
 }

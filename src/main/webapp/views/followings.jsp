@@ -29,16 +29,20 @@
 			<div class="col-lg-4 offset-lg-4">
 				<table table border=1 style="width: 100%">
 					<tr align="center" style= "height:50px">
-						<th colspan="2">All FOLLOWING</th>
+						<th colspan="3">All FOLLOWING</th>
 					</tr>
 					<tr >
 						<th>ProfilePhoto</th>
 						<th>Name</th>
+						<th>Fucn</th>
 					</tr>
 					<c:forEach var="j" items="${listOfFollowing}">	
 						<tr>
+					
 							<td><img src="../image/${j.following.profilephoto}" alt="" border=3 height=60 width=60></img></td>
 							<td>${j.following.fullName}</td>
+							<td><a class="btn btn-sm btn-danger"
+								href="/following/delete/${j.id}">Unfollow</a></td>
 						</tr>
 					</c:forEach>
 				</table>

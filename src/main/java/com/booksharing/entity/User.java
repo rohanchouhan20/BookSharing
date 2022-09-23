@@ -1,13 +1,19 @@
 package com.booksharing.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
 @Entity
@@ -25,6 +31,8 @@ public class User {
 
 	@Column(name = "username")
 	private String userName;
+
+
 	private String email;
 	private String password;
 	private String fullName;
@@ -34,7 +42,20 @@ public class User {
 	private String favsongs;
 	private String favplaces;
 	private String profilephoto = "Default.png";
+	
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Following> Following;
 
+	public List<Following> getFollowing() {
+		return Following;
+	}
+
+	public void setFollowing(List<Following> following) {
+		Following = following;
+	}
+
+	
 	public User(String fullName, String userName, String email, String password, boolean value, String favbooks,
 			String favsongs, String favplaces, String profilephoto) {
 		super();

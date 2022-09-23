@@ -26,5 +26,9 @@ public class FollowerServiceImpl implements FollowerService {
 	public int countFollower(int id) {
 		return this.followerRepo.countFollower(id);
 	}
+	
+	public void unfollow(int id) {
+		followerRepo.deleteById(id);
+	}
 
 }

@@ -30,16 +30,19 @@
 			<%-- 	${listOfFollowers} --%>
 				<table table border=1 style="width: 100%">
 					<tr align="center" style= "height:50px">
-						<th colspan="2">ALL FOLLOWERS</th>
+						<th colspan="3">ALL FOLLOWERS</th>
 					</tr>
 					<tr >
 						<th>ProfilePhoto</th>
 						<th>Name</th>
+						<th>Fucn</th>
 					</tr>
 					<c:forEach var="j" items="${listOfFollowers}">	
 						<tr>
 							<td><img src="../image/${j.follower.profilephoto}" alt="" border=3 height=60 width=60></img></td>
 							<td>${j.follower.fullName}</td>
+							<td><a class="btn btn-sm btn-danger"
+								href="/follower/delete/${j.id}">Unfollow</a></td>
 						</tr>
 					</c:forEach>
 				</table>

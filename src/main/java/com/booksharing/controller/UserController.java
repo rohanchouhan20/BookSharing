@@ -74,6 +74,7 @@ public class UserController {
 		System.out.println(requests);
 		System.out.println("Search -> "+search);
 		User in  = serviceImpl.getDetails(search);
+		System.out.println(in.getFollowing());
 		if(in!=null) {
 		modelAndView.addObject("user", in);
 		modelAndView.addObject("requests", requests);

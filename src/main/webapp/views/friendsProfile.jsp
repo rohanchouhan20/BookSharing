@@ -29,6 +29,7 @@
 				<div class="text-center alert alert-success" role="alert">${msg6	}</div>
 				</c:if>
 	<br>
+	${user}
 	<div class="d-flex justify-content-center">
 		<c:if test="${user.getProfilephoto()!=null}">
 			<img height="200" width="200" style="border-radius: 900px"

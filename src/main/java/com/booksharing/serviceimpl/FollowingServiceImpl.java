@@ -27,5 +27,7 @@ public class FollowingServiceImpl implements FollowingService {
 	public List<Following> followingList(int id){
 		return this.followingRepo.findByUser_id(id);
 	}
-
+	public void unfollow(int id) {
+		followingRepo.deleteById(id);
+	}
 }

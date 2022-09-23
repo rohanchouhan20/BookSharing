@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page isELIgnored="false" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
-<html lang="en" >
+<html lang="en">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -18,43 +18,50 @@
 <link rel="stylesheet" href="../css/login.css" />
 <title>Login Page</title>
 </head>
-<body class="img js-fullheight" style="background-image: url(../image/bg.jpg); background-size:cover; background-position:center;height:100vh">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
+<body class="img js-fullheight"
+	style="background-image: url(../image/bg.jpg); background-size: cover; background-position: center; height: 100vh">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6 text-center mb-5">
 				<br>
-					<h2 class="heading-section">Login</h2>
-				</div>
+				<h2 class="heading-section">Login</h2>
 			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">Have an account?</h3>
-		      	<form action="/user/logincheck" method="POST">
-		      	
-		      	<div class="form-group">
-		      	
-		      		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="Email" name="email" required>
-		      		</div>
-	            <div class="form-group">
-	              <input id="password-field" type="password" class="form-control" placeholder="Password" name="password" required>
-	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-	            </div>
-	            
-	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
-	            </div>
-	          </form>
-	          <p class="w-100 text-center">&mdash;  Not Registered? &mdash;</p>
-	          <div class="social d-flex text-center">
-	          	<a href="/user/signuppage" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2">Signup</span></a>
-	          	<!-- <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a> -->
-	          </div>
-		      </div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-6 col-lg-4">
+				<div class="login-wrap p-0">
+					<h3 class="mb-4 text-center">Have an account?</h3>
+					<form action="/user/logincheck" method="POST">
+
+						<div class="form-group">
+
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Email"
+									name="email" required>
+							</div>
+							<div class="form-group">
+								<input id="password-field" type="password" class="form-control"
+									placeholder="Password" name="password" required> <span
+									toggle="#password-field"
+									class="fa fa-fw fa-eye field-icon toggle-password"></span>
+							</div>
+
+							<div class="form-group">
+								<button type="submit"
+									class="form-control btn btn-primary submit px-3">Sign
+									In</button>
+							</div>
+					</form>
+					<p class="w-100 text-center">&mdash; Not Registered? &mdash;</p>
+					<div class="social d-flex text-center">
+						<a href="/user/signuppage" class="px-2 py-2 mr-md-1 rounded"><span
+							class="ion-logo-facebook mr-2">Signup</span></a>
+						<!-- <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a> -->
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<%-- <div class="container">
 		<div class="row">

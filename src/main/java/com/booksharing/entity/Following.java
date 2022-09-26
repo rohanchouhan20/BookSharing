@@ -6,10 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //@Component
 @Entity
@@ -21,12 +19,8 @@ public class Following {
 	private int id;
 
 	private int user_id;
-	
-//	private User user;
 
-//	@OneToOne
-	@JsonIgnore
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "following")
 	private User following;
 

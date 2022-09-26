@@ -79,9 +79,10 @@ public class RequestsController {
 	}
 
 	@GetMapping("/followback")
-	public ModelAndView followBack(@RequestParam("userId") int userId) {
+	public ModelAndView followBack(@RequestParam("userId") int userId,HttpSession session) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
-		if (this.requestsServiceImpl.saveFollower(loginUserId, userId))
+		System.out.println("------->"+userId);
+		if (this.requestsServiceImpl.saveFollower((int) session.getAttribute("id"), userId))
 			modelAndView.addObject("msg1", "Follow-Back Successfully");
 			modelAndView.setViewName("success");
 		return modelAndView;

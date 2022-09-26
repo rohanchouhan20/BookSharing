@@ -42,7 +42,7 @@ public class FollowingController {
 	@GetMapping("/delete/{id}")
 	public ModelAndView delete(@PathVariable int id, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
-		followingServiceImpl.unfollow(id);
+		followingServiceImpl.unfollow(id,(int)session.getAttribute("id"));
 		modelAndView.setViewName("redirect:/user/userProfile");
 		return modelAndView;
 	}

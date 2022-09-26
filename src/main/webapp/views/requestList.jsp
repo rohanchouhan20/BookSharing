@@ -71,9 +71,7 @@
 											<td>
 												<h6>
 													<c:if test="${!i.getFollowBack()}">
-														<a
-															href="/request/followback?userId=${i.getSender().getId()}">Follow
-															Back</a>
+														<a href="/request/followback?userId=${i.getSender().getId()}">Follow Back</a>
 													</c:if>
 												</h6>
 											</td>

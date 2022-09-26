@@ -2,6 +2,7 @@ package com.booksharing.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.booksharing.entity.Followers;
+import com.booksharing.entity.Following;
 import com.booksharing.entity.PostEntity;
 import com.booksharing.entity.Requests;
 import com.booksharing.entity.User;
@@ -36,6 +39,9 @@ public class UserController {
 	
 	@Autowired
 	private FollowingServiceImpl followingServiceImpl;
+	
+	@Autowired
+	private FollowerServiceImpl followerServiceImpl;
 	
 	@Autowired
 	private FollowerServiceImpl realFollowerServiceImpl;
@@ -73,10 +79,18 @@ public class UserController {
 		List<Requests> requests= requestsServiceImpl.getSenderRequest((int)session.getAttribute("id"));
 		System.out.println(requests);
 		System.out.println("Search -> "+search);
-		User in  = serviceImpl.getDetails(search);
-		System.out.println(in.getFollowing());
-		if(in!=null) {
-		modelAndView.addObject("user", in);
+		User userObj  = serviceImpl.getDetails(search);
+		List<Following> following = followingServiceImpl.followingList((int)session.getAttribute("id"));
+		List<Followers> followers = followerServiceImpl.followersList((int)session.getAttribute("id"));
+		
+		following=following.stream().filter(x->x.getFollowing().getId()==userObj.getId()).collect(Collectors.toList());
+		followers=followers.stream().filter(x->x.getFollower().getId()==userObj.getId()).collect(Collectors.toList());
+		System.out.println("followers --- "+followers);
+		System.out.println("following --- "+following);
+		if(userObj!=null) {
+		modelAndView.addObject("user", userObj);
+		modelAndView.addObject("following", following);
+		modelAndView.addObject("followers", followers);
 		modelAndView.addObject("requests", requests);
 		modelAndView.addObject("id", (int)session.getAttribute("id"));
 		modelAndView.addObject("msgsuccess", search);

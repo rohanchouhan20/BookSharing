@@ -25,32 +25,52 @@
 
 	<%@ include file="nav.jsp"%>
 	<br>
-		<c:if test="${msg6!=null}">
-				<div class="text-center alert alert-success" role="alert">${msg6	}</div>
-				</c:if>
+	<c:if test="${msg6!=null}">
+		<div class="text-center alert alert-success" role="alert">${msg6	}</div>
+	</c:if>
 	<br>
-	${user}
+	<br>
 	<div class="d-flex justify-content-center">
 		<c:if test="${user.getProfilephoto()!=null}">
 			<img height="200" width="200" style="border-radius: 900px"
 				src="../image/${user.getProfilephoto()}" />
 		</c:if>
 	</div>
-		<br>
+	<br>
 	<c:if test="${user.getProfilephoto()!=null}">
 		<div class="d-flex justify-content-center">
 			<h3>${msgsuccess}</h3>
 		</div>
 		<div class="d-flex justify-content-center">
+			<c:if
+				test="${requests.isEmpty() && following.size()==0 && followers.size()==0}">
+				<h4>
+					<a href="/request/followrequest?userId=${user.getId()}">Follow</a>
+				</h4>
+			</c:if>
+
 			<c:forEach var="j" items="${requests}">
-		<c:if test="${j.sender.id == id}">
-			<h4><a href="/request/deleterequest?userId=${user.getId()}">Decline</a></h4>
-		</c:if>
-		</c:forEach>
-		<c:if test="${requests.isEmpty()}">
-			<h4><a href="/request/followrequest?userId=${user.getId()}">Follow</a></h4>
-		</c:if>
-	
+				<c:if test="${j.sender.id == id}">
+					<h4>
+						<a href="/request/deleterequest?userId=${user.getId()}">Decline</a>
+					</h4>
+				</c:if>
+			</c:forEach>
+
+			<c:if test="${following.size()>0 && followers.size()>0}">
+			<c:forEach var="f" items="${following}">
+				<h4>
+					<a href="/following/delete/${f.following.id}">UnFollow</a>
+				</h4>
+				</c:forEach>
+			</c:if>
+
+			<c:if test="${following.size()==0 && followers.size()>0}">
+				<h4>
+					<a href="/request/followback?userId=${user.getId()}">FollowBack</a>
+				</h4>
+			</c:if>
+
 		</div>
 	</c:if>
 	<c:choose>

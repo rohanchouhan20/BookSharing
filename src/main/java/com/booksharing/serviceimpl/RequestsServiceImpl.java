@@ -23,8 +23,7 @@ public class RequestsServiceImpl implements RequestsService {
 
 	@Autowired
 	private FollowerServiceImpl followerServiceImpl;
-	
-	
+
 //	public List<Requests> getRequests(int id){
 //		return null;
 //		
@@ -50,10 +49,11 @@ public class RequestsServiceImpl implements RequestsService {
 
 		return this.requestsRepo.findByUserIdAndAccept(id, accept, follow);
 	}
+
 	public List<Requests> getSenderRequest(int id) {
 		boolean accept = false;
 		boolean follow = false;
-		
+
 		return this.requestsRepo.findByUserSenderId(id, accept, follow);
 	}
 
@@ -61,6 +61,7 @@ public class RequestsServiceImpl implements RequestsService {
 	public int deleteRequest(int acceptUser, int userId) {
 		return this.requestsRepo.deleteByUserIdAndFollowerId(acceptUser, userId);
 	}
+
 	@Transactional
 	public int declineRequest(int userId) {
 		return this.requestsRepo.deleteRequest(userId);
@@ -94,25 +95,31 @@ public class RequestsServiceImpl implements RequestsService {
 				return 1;
 		}
 		return 0;
-	}
+	}	
 
-	@Transactional
-	public boolean saveFollower(int loginUserId, int userId) {
-		if (this.requestsRepo.deleteByUserIdAndFollowerId(loginUserId, userId) > 0) {
+	@Transactional(rollbackFor = Exception.class)
+	public boolean saveFollower(int loginUserId, int userId) throws Exception {
+		
+		System.out.println("Login Id --"+loginUserId);
+		System.out.println("userId --"+userId);
+		try {
+			if (this.requestsRepo.deleteByUserIdAndFollowerId(loginUserId, userId)> 0) {
 
-			Requests requests = new Requests();
-			User user = new User();
-			user.setId(loginUserId);
+				Requests requests = new Requests();
+				User user = new User();
+				user.setId(loginUserId);
 
-			requests.setSender(user);
-			requests.setReciever(userId);
-			requests.setAccepted(false);
-			requests.setFollowBack(true);
+				requests.setSender(user);
+				requests.setReciever(userId);
+				requests.setAccepted(false);
+				requests.setFollowBack(true);
 
-			if (this.requestsRepo.save(requests) != null)
-				return true;
+				if (this.requestsRepo.save(requests) != null)
+					return true;
+			}
+		} catch (Exception e) {
+			throw new Exception("Exception occur");
 		}
-
 		return false;
 	}
 }

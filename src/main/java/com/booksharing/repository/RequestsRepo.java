@@ -2,6 +2,8 @@ package com.booksharing.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -29,6 +31,7 @@ public interface RequestsRepo extends CrudRepository<Requests, Integer> {
 	@Query(value = "select * from requests where sender=:id and reciever=:acceptUser ", nativeQuery = true)
 	public Requests findByUserIdAndAcceptAndSendUser(@Param("id") int id, @Param("acceptUser") int acceptUser);
 
+	@Transactional
 	@Modifying
 	@Query(value = "delete from requests where reciever=:acceptUser and sender=:userId", nativeQuery = true)
 	public int deleteByUserIdAndFollowerId(@Param("acceptUser") int acceptUser, @Param("userId") int userId);

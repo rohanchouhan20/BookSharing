@@ -42,7 +42,7 @@
 							<td><img src="../image/${j.follower.profilephoto}" alt="" border=3 height=60 width=60></img></td>
 							<td>${j.follower.fullName}</td>
 							<td><a class="btn btn-sm btn-danger"
-								href="/follower/delete/${j.id}">Unfollow</a></td>
+								href="/follower/delete/${j.follower.id}">Unfollow</a></td>
 						</tr>
 					</c:forEach>
 				</table>

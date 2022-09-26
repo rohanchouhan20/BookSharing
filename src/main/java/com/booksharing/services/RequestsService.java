@@ -14,6 +14,6 @@ public interface RequestsService {
 
 	public int accept(int acceptUser, int userId);
 
-	public boolean saveFollower(int acceptUser, int userId);
+	public boolean saveFollower(int acceptUser, int userId) throws Exception;
 
 }
